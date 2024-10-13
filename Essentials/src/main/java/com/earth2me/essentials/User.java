@@ -520,6 +520,7 @@ public class User extends UserData implements Comparable<User>, IMessageRecipien
             }
         }
         final String strPrefix = prefix.toString();
+        suffix = suffix.replaceAll("§r", "<reset>");
         String output = strPrefix + nickname + suffix;
         if (output.charAt(output.length() - 1) == '§') {
             output = output.substring(0, output.length() - 1);
@@ -805,7 +806,7 @@ public class User extends UserData implements Comparable<User>, IMessageRecipien
             if (broadcast && !isHidden() && !isAfk()) {
                 setDisplayNick();
                 if (ess.getSettings().broadcastAfkMessage()) {
-                    ess.broadcastTl(this, u -> u == this, "userIsNotAway", getDisplayName());
+                    ess.broadcastTl(this, u -> u == this, "userIsNotAway", getName());
                 }
                 sendTl("userIsNotAwaySelf", getDisplayName());
             }
