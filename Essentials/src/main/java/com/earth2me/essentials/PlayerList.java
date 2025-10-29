@@ -4,6 +4,9 @@ import com.earth2me.essentials.utils.AdventureUtil;
 import com.earth2me.essentials.utils.FormatUtil;
 import com.earth2me.essentials.utils.NumberUtil;
 import net.ess3.api.TranslatableException;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Server;
 
 import java.util.ArrayList;
@@ -39,7 +42,7 @@ public final class PlayerList {
                 groupString.append(tlLiteral("listHiddenTag"));
             }
             user.setDisplayNick();
-            groupString.append(AdventureUtil.legacyToMini(user.getDisplayName()));
+            groupString.append(FormatUtil.stripFormat(user.getDisplayName()));
 
             final String strippedNick = FormatUtil.stripFormat(user.getNickname());
             if (ess.getSettings().realNamesOnList() && strippedNick != null && !strippedNick.equals(user.getName())) {
