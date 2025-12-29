@@ -2,8 +2,6 @@ package com.earth2me.essentials.textreader;
 
 import com.earth2me.essentials.CommandSource;
 import com.earth2me.essentials.I18n;
-import com.earth2me.essentials.utils.FormatUtil;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 
 import java.util.List;
 import java.util.Locale;

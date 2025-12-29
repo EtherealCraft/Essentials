@@ -2,6 +2,7 @@ package com.earth2me.essentials.commands;
 
 import com.earth2me.essentials.CommandSource;
 import com.earth2me.essentials.User;
+import com.earth2me.essentials.utils.AdventureUtil;
 import com.earth2me.essentials.utils.FormatUtil;
 import net.ess3.api.TranslatableException;
 import net.ess3.api.events.NickChangeEvent;
@@ -51,12 +52,12 @@ public class Commandnick extends EssentialsLoopCommand {
             if (!target.getDisplayName().equalsIgnoreCase(target.getDisplayName())) {
                 target.sendTl("nickNoMore");
             }
-            target.sendTl("nickSet", ess.getSettings().changeDisplayName() ? target.getDisplayName() : nick);
+            target.sendTl("nickSet", ess.getSettings().changeDisplayName() ? AdventureUtil.parsed(target.getDisplayName()) : AdventureUtil.parsed(nick));
         } else if (nickInUse(target, nick)) {
             throw new NotEnoughArgumentsException(sender.tl("nickInUse"));
         } else {
             setNickname(server, sender, target, nick);
-            target.sendTl("nickSet", ess.getSettings().changeDisplayName() ? target.getDisplayName() : nick);
+            target.sendTl("nickSet", ess.getSettings().changeDisplayName() ? AdventureUtil.parsed(target.getDisplayName()) : AdventureUtil.parsed(nick));
         }
     }
 
