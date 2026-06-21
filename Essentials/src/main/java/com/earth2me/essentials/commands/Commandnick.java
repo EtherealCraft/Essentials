@@ -2,7 +2,7 @@ package com.earth2me.essentials.commands;
 
 import com.earth2me.essentials.CommandSource;
 import com.earth2me.essentials.User;
-import com.earth2me.essentials.utils.AdventureUtil;
+import com.earth2me.essentials.adventure.AdventureUtil;
 import com.earth2me.essentials.utils.FormatUtil;
 import net.ess3.api.TranslatableException;
 import net.ess3.api.events.NickChangeEvent;
@@ -49,7 +49,8 @@ public class Commandnick extends EssentialsLoopCommand {
             target.sendTl("nickNoMore");
         } else if (target.getName().equalsIgnoreCase(nick)) {
             setNickname(server, sender, target, nick);
-            if (!target.getDisplayName().equalsIgnoreCase(target.getDisplayName())) {
+            final String strippedDisplay = FormatUtil.stripFormat(target.getDisplayName());
+            if (strippedDisplay != null && !strippedDisplay.equalsIgnoreCase(target.getName())) {
                 target.sendTl("nickNoMore");
             }
             target.sendTl("nickSet", ess.getSettings().changeDisplayName() ? AdventureUtil.parsed(target.getDisplayName()) : AdventureUtil.parsed(nick));
@@ -121,7 +122,7 @@ public class Commandnick extends EssentialsLoopCommand {
     @Override
     protected List<String> getTabCompleteOptions(final Server server, final CommandSource sender, final String commandLabel, final String[] args) {
         if (args.length == 1 && sender.isAuthorized("essentials.nick.others")) {
-            return getPlayers(server, sender);
+            return getPlayers(sender);
         } else {
             return Collections.emptyList();
         }
